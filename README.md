@@ -7,7 +7,7 @@
  - Tuple destructuring
  - First-class lambda functions
  - Mutually recursive functions
- - Basic I/O (printing and output)
+ - Basic I/O (`print(var)` and `input()`)
  - Cheney's semi-space garbage collection
  - Chromatic Register Allocator
  - Struct definitions
