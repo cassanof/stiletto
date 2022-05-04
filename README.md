@@ -1,6 +1,6 @@
 # Stiletto - STructs ImpLEmenTed Towards Object-orientation
 ## A Compiler written in ML for a python-like (mostly) functional language.
-### Written in collaboration with [@parsons90](https://github.com/parsons90/) for Compiler Design at Northeaster University
+### Written in collaboration with [@parsons90](https://github.com/parsons90/) for Compiler Design at Northeastern University
 ***Non-ubiquitous Features:***
  - x84_64 target architecture
  - Untyped tuples
