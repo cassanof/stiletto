@@ -1,0 +1,50 @@
+struct BTNode = (v, l: BTNode, r: BTNode) in
+  method sizeHelp():
+    if (self.l == nil):
+       1 + self.r.size()
+    else:
+      if (self.r == nil):
+        1 + self.l.size()
+      else:
+        1 + self.l.size() + self.r.size()
+
+  method size():
+    if ((self.l == nil) && (self.r == nil)):
+      1
+    else:
+      self.sizeHelp()
+
+  method flattenMapHelp(f):
+    if (self.l == nil):
+       (f(self.v), self.r.flattenMap(f))
+    else:
+      if (self.r == nil):
+       (f(self.v), self.l.flattenMap(f))
+      else:
+       (f(self.v), self.l.flattenMap(f), self.r.flattenMap(f))
+
+  method flattenMap(f):
+    if ((self.l == nil) && (self.r == nil)):
+      f(self.v)
+    else:
+      self.flattenMapHelp(f)
+
+endstruct
+
+struct BTUtils = () in
+  method buildTree(n):
+    if (n <= 0):
+      nil
+    else:
+      new BTNode(n, self.buildTree(n - 1), self.buildTree(n - 2))
+endstruct
+
+let bt = new BTNode(1, new BTNode(2, new BTNode(4, nil, new BTNode(5, nil, nil)), nil), new BTNode(6, nil, nil)) in
+let bt2: BTNode = new BTUtils().buildTree(7) in
+let rec flipbool = (lambda (n): if n == 0: false else: if n <= 0: true else: flipbool( n - 2 )) in
+print(bt);
+print(bt2);
+print(bt.size());
+print(bt2.size());
+print(bt2.flattenMap((lambda (i): i * 9)));
+bt2.flattenMap(flipbool)

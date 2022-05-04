@@ -1,0 +1,7 @@
+struct Cons = (first, rest : Cons) in
+  method length():
+    if (self.rest == nil):
+      0
+    else: 1 + self.rest.length()
+  endstruct
+  new Cons(1, nil).oops

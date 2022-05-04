@@ -1,0 +1,18 @@
+This directory should contain files to be run by the `input_file_test_suite` in test.ml.
+
+Tests should come in groups of related files:
+- someTest.stile: the input program to be run
+- someTest.options: if present, options for compiling and running the program, one word per line
+  options are
+  * "valgrind" to run the program with valgrind,
+  * "no_builtins" to compile the program without any predefined native functions (like print or input)
+  * "heap" followed by an integer to run the program with the given heap size (in words)
+  * "alloc_strat" followed by either "naive" or "register" to tell the compiler
+    which register-allocation strategy to use
+- someTest.args: the command line arguments to use when running the program
+  * note that if this file exists, the "heap" option above is ignored
+- someTest.in: the (optional) input to your program
+- someTest.err: the (optional) expected output of your program
+
+The .err file's contents will be treated as a substring to check for: if the file is missing,
+then this simply tests that the program either fails to compile or fails to run.

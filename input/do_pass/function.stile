@@ -1,0 +1,36 @@
+struct Triple = (x, y, z) in
+  method accept(f): f(self)
+endstruct
+
+struct Multiplier = (factor) in
+  method mult(t: Triple): 
+    new Triple(t.x * self.factor, t.y * self.factor, t.z * self.factor)
+endstruct
+
+struct StateSave = (state: Triple) in
+  method save(t: Triple): 
+    self.state := new Triple(t.x, t.y, t.z);
+    self.state.accept := t.accept
+
+  method restore(t: Triple):
+    t.x := self.state.x;
+    t.y := self.state.y;
+    t.z := self.state.z;
+    t.accept := self.state.accept
+endstruct
+
+let t = new Triple(1, 2, 3) in
+let t2 = new Triple(4,5, 6) in
+let mul = new Multiplier(4) in
+print(t.accept(mul.mult));
+let sv = new StateSave(nil) in
+t.accept(sv.save);
+print(sv);
+t.x := 999;
+print(t);
+t.accept(sv.restore);
+print(t);
+t.accept := (lambda (x): x + 2);
+print(t.accept(3));
+sv.restore(t);
+t.accept(mul.mult)

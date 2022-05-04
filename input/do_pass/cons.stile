@@ -1,0 +1,46 @@
+struct Cons = (first, rest: Cons) in
+  method length():
+    if (self.rest == nil):
+      1
+    else: 
+      1 + self.rest.length()
+
+  method foldr(f, base):
+    if (self.rest == nil):
+      f(self.first, base)
+    else: 
+      f(self.first, self.rest.foldr(f, base))
+
+  method foldl(f, base):
+    if (self.rest == nil):
+      f(self.first, base)
+    else: 
+      self.rest.foldl(f, f(self.first, base))
+
+  method map(f):
+    if (self.rest == nil):
+      new Cons(f(self.first), nil)
+    else: 
+      new Cons(f(self.first), self.rest.map(f))
+endstruct
+
+struct ConsUtils = () in
+  method genCons(n): 
+    if (n == 0): 
+      nil 
+    else: 
+      new Cons(n, self.genCons(n - 1))
+endstruct
+
+let cu = new ConsUtils() in
+let conses = cu.genCons(5),
+    sum = conses.foldr((lambda (i, acc): i + acc), 0) 
+    in
+let tuplefiedLeft = conses.map((lambda (i): i * 2))
+                          .foldl((lambda (i, acc): (i, acc)), sum)
+    in
+let tuplefiedRight = conses.map((lambda (i): i * 2))
+                           .foldr((lambda (i, acc): (i, acc)), sum)
+    in
+print((tuplefiedLeft, tuplefiedRight));
+conses.length()

@@ -1,0 +1,21 @@
+(library
+  (name stiletto_impl)
+  (modules assembly compile errors exprs phases pretty runner lexer parser graph)
+  (libraries ounit2 extlib unix)
+  (wrapped false))
+
+(ocamllex (modules lexer))
+(menhir (modules parser))
+
+(executable
+  (name main)
+  (modules main)
+  (libraries stiletto_impl))
+
+(test
+  (name test)
+  (modules test)
+  (libraries stiletto_impl))
+
+(env (dev (flags (:standard -warn-error -A))))
+

@@ -1,0 +1,14 @@
+main
+test
+output/*.o
+output/*.run
+output/*.s
+output/*.dSYM
+output/*/*.o
+output/*/*.run
+output/*/*.s
+output/*/*.dSYM
+*.sw*
+*~
+*.log
+_build/*
